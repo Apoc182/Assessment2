@@ -58,6 +58,7 @@ function checkName(name, element) {
     good(element);
 
   }
+  
 }
 
 function checkEmail(email) {
