@@ -7,3 +7,4 @@
 - make sure only registered users can post reviews
 - Background and footer
 - Add a logo far left in menu
+- Make submit onlick in registration return true when passing and false when not. 
