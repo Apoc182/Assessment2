@@ -74,12 +74,17 @@ form > div {
 
 input {
   box-sizing: border-box;
+  padding: 1%;
+  margin-top: 5px;
+}
+
+.userTextInput input {
+
   width: 98%;
   margin-right: 2%;
   outline: none;
   border: 1px solid transparent;
-  padding: 1%;
-  margin-top: 5px;
+
 }
 
 form p {
@@ -95,6 +100,26 @@ form p {
 
 .birthday input {
   width: 31.33%;
+}
+
+input[type="checkbox"] {
+    text-align: left;
+    display: inline-block;
+    width: 15px;
+    vertical-align: top;
+}
+
+.terms p {
+  font-size: 15px;
+  display: inline-block;
+  width: auto;
+  word-break: break-all;
+}
+
+.terms {
+  text-align: left;
+  display: inline-block;
+
 }
 
 .submitButton input {
