@@ -7,15 +7,15 @@
   </head>
   <div id="wrapper">
     <body>
-      <?php include 'lib/header.php'?>
+      <?php include 'lib/header.php' ?>
 
         <div class="welcome">
           <h1>Search for great local wifi hotspots</h1>
         </div>
 
         <div id="searchbox">
-          <form action="results.html">
-            <input type="text" placeholder="e.g. Ashgrove">
+          <form action="results.php" method="GET">
+            <input type="text" name="search" placeholder="e.g. Ashgrove">
             <input class="submitButton" type="submit" value="Search" >
           </form>
         </div>

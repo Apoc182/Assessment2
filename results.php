@@ -8,10 +8,43 @@
     </head>
     <body>
         <div id="wrapper">
-            <?php include 'lib/header.php'?>
-            <div id = "map"></div>
+            <?php include 'lib/header.php';
+			
+				if(!empty($_GET)){
+					
+					require 'lib/sqlconnect.php';
+					$search = $_GET['search'];
+					
+					$sql = "SELECT * FROM items WHERE `Wifi Hotspot Name` LIKE concat('%', :search, '%')";
+					$results = $pdo->prepare($sql);
+					
+					$results->bindValue(":search", $search);
+					
+					if($results->execute()){
+						
+						while($row = $results->fetch()){
+							
+							echo $row['Wifi Hotspot Name'] . "<br>";
+							
+						}
+						
+					}
+					
+						
+						
+				}else{
+					
+					echo "There were no results.";
+					
+				}
+					
+					
+					
+			
+			
+			?>
 
-            <script src='https://maps.googleapis.com/maps/api/js?key=AIzaSyCnrMuizpvQ7jnYzVnpWBJw1ThoynhvLLY&callback=myMap'></script>
+<!--            <script src='https://maps.googleapis.com/maps/api/js?key=AIzaSyCnrMuizpvQ7jnYzVnpWBJw1ThoynhvLLY&callback=myMap'></script>
 
         <table id="results_table">
               <tr>
@@ -30,7 +63,7 @@
                 <td>458.273 E 224.182 N</td>
               </tr>
             </table>
-        </wrapper>
-
+        </div>
+-->
     </body>
 </html>
