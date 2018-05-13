@@ -27,6 +27,8 @@ function checkForm() {
   checkMobile(userData[3]);
   checkBirthday(userData[4], userData[5], userData[6]);
   checkPassword(userData[7], userData[8]);
+  
+  return false;
 }
 
 function checkName(name, element) {

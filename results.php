@@ -8,14 +8,7 @@
     </head>
     <body>
         <div id="wrapper">
-            <header>
-                <ul>
-                    <li><a href="search.html">Search</a></li>
-                    <li><a href = "results.html">Results</li>
-                    <li><a href="item.html">Item</a></li>
-                    <li><a href="index.html">Registration</a></li>
-                </ul>
-            </header>
+            <?php include 'lib/header.php'?>
             <div id = "map"></div>
 
             <script src='https://maps.googleapis.com/maps/api/js?key=AIzaSyCnrMuizpvQ7jnYzVnpWBJw1ThoynhvLLY&callback=myMap'></script>

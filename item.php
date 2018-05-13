@@ -7,15 +7,8 @@
     <script src="JS/map.js"></script>
   </head>
   <div id="wrapper">
-    <body>
-      <header>
-        <ul>
-            <li><a href="search.html">Search</a></li>
-            <li><a href = "results.html">Results</a></li>
-            <li><a href="item.html">Item</a></li>
-            <li><a href="index.html">Registration</a></li>
-        </ul>
-      </header>
+  <body>
+	  <?php include 'lib/header.php'?>
       <div id="map2"></div>
       <script src='https://maps.googleapis.com/maps/api/js?key=AIzaSyCnrMuizpvQ7jnYzVnpWBJw1ThoynhvLLY&callback=myMap'></script>
       <div id="item-desc">
