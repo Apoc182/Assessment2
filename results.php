@@ -15,6 +15,13 @@
 					require 'lib/sqlconnect.php';
 					$search = $_GET['search'];
 					
+					if($search == ""){
+						echo "Please enter a search query.";
+						
+						die();
+						
+					}
+					
 					$sql = "SELECT * FROM items WHERE `Wifi Hotspot Name` LIKE concat('%', :search, '%')";
 					$results = $pdo->prepare($sql);
 					
@@ -22,21 +29,28 @@
 					
 					if($results->execute()){
 						
+						if($results->rowCount() < 1){
+							
+							echo "There were no results.";
+							die();
+							
+						}
+						
 						while($row = $results->fetch()){
 							
 							echo $row['Wifi Hotspot Name'] . "<br>";
 							
 						}
 						
+					}else{
+						
+						
+						
 					}
 					
 						
 						
-				}else{
-					
-					echo "There were no results.";
-					
-				}
+					}
 					
 					
 					

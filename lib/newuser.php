@@ -48,11 +48,12 @@
 		  
 		}
 		
-		if (strlen($mobilenum) < 8){
+		if (strlen($mobilenum) != 10){
 			
-			return "Phone number must be at least 8 digits long.";
+			return "Phone number must be 10 digits long.";
 			
 		}
+
 				
 	}
 	
