@@ -11,73 +11,27 @@
             <?php include 'lib/header.php';
 			
 				if(!empty($_GET)){
+					include 'lib/sql_functions.php';
+
+					//Going to have to have issets in here and build a master SQL query based on what we have.
 					
-					require 'lib/sqlconnect.php';
-					$search = $_GET['search'];
+					if(isset($_GET['search']) && $_GET['search'] != "") $sql .= "`Wifi Hotspot Name`, ";
+					if(isset($_GET['suburb']) && $_GET['suburb'] != "") $sql .= "Suburb, ";
+					if(isset($_GET['rating']) && $_GET['rating'] != "") $stuff = ratingSearch($_GET['rating']);
+					var_dump($stuff);
 					
-					if($search == ""){
-						echo "Please enter a search query.";
+					if($sql == 'SELECT '){
 						
-						die();
+						echo "Please enter something to search on...";
+						exit();
 						
 					}
 					
-					$sql = "SELECT * FROM items WHERE `Wifi Hotspot Name` LIKE concat('%', :search, '%')";
-					$results = $pdo->prepare($sql);
-					
-					$results->bindValue(":search", $search);
-					
-					if($results->execute()){
-						
-						if($results->rowCount() < 1){
-							
-							echo "There were no results.";
-							die();
-							
-						}
-						
-						while($row = $results->fetch()){
-							
-							echo $row['Wifi Hotspot Name'] . "<br>";
-							
-						}
-						
-					}else{
-						
-						
-						
-					}
-					
-						
-						
-					}
-					
-					
-					
-			
-			
+				}
 			?>
+					
 
-<!--            <script src='https://maps.googleapis.com/maps/api/js?key=AIzaSyCnrMuizpvQ7jnYzVnpWBJw1ThoynhvLLY&callback=myMap'></script>
+			</div>
 
-        <table id="results_table">
-              <tr>
-                <th>Name</th>
-                <th>Suburb</th>
-                <th>Location</th>
-              </tr>
-              <tr>
-                <td>Grave Park</td>
-                <td>Townsville</td>
-                <td>123.666 E 999.124 N</td>
-              </tr>
-              <tr>
-                <td>Cattle Station</td>
-                <td>Jacksonville</td>
-                <td>458.273 E 224.182 N</td>
-              </tr>
-            </table>
-        </div>
--->
     </body>
 </html>

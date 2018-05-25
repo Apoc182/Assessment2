@@ -16,6 +16,16 @@
         <div id="searchbox">
           <form action="results.php" method="GET">
             <input type="text" name="search" placeholder="e.g. Ashgrove">
+			<?php
+			
+				include 'lib/sql_functions.php';
+				include 'lib/php_general.php';
+				$suburbs = getSuburbs();
+				echo dynamicSelect($suburbs, 'suburb', 'Suburb');
+				$rating = [1, 2, 3, 4, 5];
+				echo dynamicSelect($rating, 'rating', 'Rating');
+			
+			?>
             <input class="submitButton" type="submit" value="Search" >
           </form>
         </div>
