@@ -53,13 +53,13 @@
 			
 		}
 		
-		$sql = "SELECT * FROM (SELECT items.`Wifi Hotspot Name`, ROUND(AVG(reviews.rating)) AS 'Average Rating' FROM items JOIN reviews ON items.id=reviews.iditem GROUP BY items.`Wifi Hotspot Name`) AS t WHERE t.`Average Rating` = " . $rating;
+		$sql = "SELECT * FROM (SELECT items.`Wifi Hotspot Name`, items.id, ROUND(AVG(reviews.rating)) AS 'Average Rating' FROM items JOIN reviews ON items.id=reviews.iditem GROUP BY items.`Wifi Hotspot Name`, items.id) AS t WHERE t.`Average Rating` = " . $rating;
 		$results = [];
 		
 		$counter = 0;
 		foreach ($pdo->query($sql) as $row){
 			
-			$results[$counter] = $row[0];
+			$results[$counter] = array($row[0], $row[1]);
 			$counter++;
 			
 		}
@@ -87,13 +87,13 @@
 		
 		require 'sqlconnect.php';
 		
-		$sql = "SELECT `Wifi Hotspot Name` FROM items WHERE `Wifi Hotspot Name` LIKE '%{$name}%'" ;
+		$sql = "SELECT `Wifi Hotspot Name`, id FROM items WHERE `Wifi Hotspot Name` LIKE '%{$name}%'" ;
 		$results = [];
 		
 		$counter = 0;
 		foreach ($pdo->query($sql) as $row){
 			
-			$results[$counter] = $row[0];
+			$results[$counter] = array($row[0], $row[1]);
 			$counter++;
 			
 		}
@@ -101,7 +101,7 @@
 		//Send something back to indicate nothing was found
 		if (count($results) < 1){
 			
-			return array("NONE");
+			return array(array("NONE",));
 			
 		}
 		
@@ -119,13 +119,13 @@
 		
 		require 'sqlconnect.php';
 		
-		$sql = "SELECT `Wifi Hotspot Name` FROM items WHERE suburb LIKE '%{$suburb}%'" ;
+		$sql = "SELECT `Wifi Hotspot Name`, id FROM items WHERE suburb LIKE '%{$suburb}%'" ;
 		$results = [];
 		
 		$counter = 0;
 		foreach ($pdo->query($sql) as $row){
 			
-			$results[$counter] = $row[0];
+			$results[$counter] = array($row[0], $row[1]);
 			$counter++;
 			
 		}

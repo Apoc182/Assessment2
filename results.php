@@ -59,10 +59,10 @@
 							$result = $array_list_clean[0];
 							break;
 						case 2:
-							$result = array_intersect($array_list_clean[0], $array_list_clean[1]);
+							$result = array_intersect($array_list_clean[0][0], $array_list_clean[1][0]);
 							break;
 						case 3:
-							$result = array_intersect($array_list_clean[0], $array_list_clean[1], $array_list_clean[2]);
+							$result = array_intersect($array_list_clean[0][0], $array_list_clean[1][0], $array_list_clean[2][0]);
 							break;
 						default:
 							$result = array();
@@ -74,7 +74,7 @@
 					foreach($result as $row){
 						
 						//Reset results if they contain a NONE
-						if($row == "NONE"){
+						if($row[0] == "NONE"){
 							
 							$result = array();
 							continue;
@@ -86,7 +86,7 @@
 					echo "<table style='width:100%'><tr><th>Name</th>";
 					foreach($result as $row){
 
-						echo "<tr><td>" . $row . "</td></tr>";
+						echo "<tr><td><a href='item.php?item_id=" . $row[1] . "'>" . $row[0] . "</a></td></tr>";
 						
 					}
 					echo "</table>";
