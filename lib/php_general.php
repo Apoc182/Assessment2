@@ -4,7 +4,7 @@
 	function dynamicSelect($list, $name, $placeholder){
 		
 		
-		$html = "<select name='" . $name . "'> <option value='' disabled selected>" . $placeholder . "</option>";
+		$html = "<select name='" . $name . "'> <option value='' selected>" . $placeholder . "</option>";
 		foreach($list as $item){
 			$html .= "<option value='" . $item . "'>" . $item . "</option>";					
 		}
@@ -15,6 +15,7 @@
 		
 		
 	}
+
 	
 
 
