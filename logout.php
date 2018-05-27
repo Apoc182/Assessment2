@@ -5,7 +5,7 @@
 	session_write_close();
 	setcookie(session_name(),'',0,'/');
 	session_regenerate_id(true);
-	header("Location: http://{$_SERVER['HTTP_HOST']}/assessment2/login.php");
+	header("Location: http://{$_SERVER['HTTP_HOST']}/students/n9431594/login.php");
 	
 
 ?>

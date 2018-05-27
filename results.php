@@ -127,24 +127,7 @@
 					
 					
 					
-					
-					
-
-					//Going to have to have issets in here and build a master SQL query based on what we have.
-					
-					// if(isset($_GET['search']) && $_GET['search'] != "") $sql .= "`Wifi Hotspot Name`, ";
-					// if(isset($_GET['suburb']) && $_GET['suburb'] != "") $sql .= "Suburb, ";
-					// if(isset($_GET['rating']) && $_GET['rating'] != "") $stuff = ratingSearch($_GET['rating']);
-					// var_dump($stuff);
-					
-					// if($sql == 'SELECT '){
-						
-						// echo "Please enter something to search on...";
-						// exit();
-						
-					// }
-					
-
+	
 			?>
 					
 

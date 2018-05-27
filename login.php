@@ -27,7 +27,7 @@
 
 					
 					//This generally should be an absolute URL
-					header("Location: http://{$_SERVER['HTTP_HOST']}/assessment2/index.php");
+					header("Location: http://{$_SERVER['HTTP_HOST']}/students/n9431594/index.php");
 	
 					
 					
