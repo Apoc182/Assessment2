@@ -35,6 +35,7 @@ if (navigator.geolocation) {
     geolocFail();
 }
 
+
 // var lat = position.coords.latitude;
 // var long = position.coords.longitude;
 
