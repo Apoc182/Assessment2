@@ -62,7 +62,7 @@
 		<center>Welcome back!
 		<form method="POST" onsubmit="return true;">
 			<input type="text" placeholder="Email address" name="email">
-			<input type="text" placeholder="Password" name="password">
+			<input type="password" placeholder="Password" name="password">
 			<input type="submit">
 			
 		</form>

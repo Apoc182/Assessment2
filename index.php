@@ -24,12 +24,19 @@
 				echo dynamicSelect($suburbs, 'suburb', 'Suburb');
 				$rating = [1, 2, 3, 4, 5];
 				echo dynamicSelect($rating, 'rating', 'Rating');
+				$distances = [10, 20, 50];
+				echo dynamicSelect($distances, 'distance', 'Distance');
 			
 			?>
-            <input class="submitButton" type="submit" value="Search" >
+			
+			<input type="hidden" name="long" id="long">
+			<input type="hidden" name="lat" id="lat">
+            <input class="submitButton" type="submit" value="Search" >		
           </form>
+		  <p  id="errors"></p>
         </div>
      </div>
+	 <script src="JS/passLongLat.js"></script>
 
   </body>
 </html>

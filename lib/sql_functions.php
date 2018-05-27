@@ -49,17 +49,17 @@
 		
 		if($rating == ""){
 			
-			return array();
+			return array(array());
 			
 		}
 		
-		$sql = "SELECT * FROM (SELECT items.`Wifi Hotspot Name`, items.id, ROUND(AVG(reviews.rating)) AS 'Average Rating' FROM items JOIN reviews ON items.id=reviews.iditem GROUP BY items.`Wifi Hotspot Name`, items.id) AS t WHERE t.`Average Rating` = " . $rating;
+		$sql = "SELECT * FROM (SELECT items.`Wifi Hotspot Name`, items.id, items.Latitude, items.Longitude, ROUND(AVG(reviews.rating)) AS 'Average Rating' FROM items JOIN reviews ON items.id=reviews.iditem GROUP BY items.`Wifi Hotspot Name`, items.id) AS t WHERE t.`Average Rating` = " . $rating;
 		$results = [];
 		
 		$counter = 0;
 		foreach ($pdo->query($sql) as $row){
 			
-			$results[$counter] = array($row[0], $row[1]);
+			$results[$counter] = array($row[0], $row[1], $row[2], $row[3]);
 			$counter++;
 			
 		}
@@ -67,7 +67,7 @@
 		//Send something back to indicate nothing was found
 		if (count($results) < 1){
 			
-			return array("NONE");
+			return array(array("NONE"));
 			
 		}
 		return $results;
@@ -81,19 +81,19 @@
 		
 		if($name == ""){
 			
-			return array();
+			return array(array());
 			
 		}
 		
 		require 'sqlconnect.php';
 		
-		$sql = "SELECT `Wifi Hotspot Name`, id FROM items WHERE `Wifi Hotspot Name` LIKE '%{$name}%'" ;
+		$sql = "SELECT `Wifi Hotspot Name`, id, Latitude, Longitude FROM items WHERE `Wifi Hotspot Name` LIKE '%{$name}%'" ;
 		$results = [];
 		
 		$counter = 0;
 		foreach ($pdo->query($sql) as $row){
 			
-			$results[$counter] = array($row[0], $row[1]);
+			$results[$counter] = array($row[0], $row[1], $row[2], $row[3]);
 			$counter++;
 			
 		}
@@ -101,7 +101,7 @@
 		//Send something back to indicate nothing was found
 		if (count($results) < 1){
 			
-			return array(array("NONE",));
+			return array(array("NONE"));
 			
 		}
 		
@@ -113,19 +113,19 @@
 		
 		if($suburb == ""){
 			
-			return array();
+			return array(array());
 			
 		}
 		
 		require 'sqlconnect.php';
 		
-		$sql = "SELECT `Wifi Hotspot Name`, id FROM items WHERE suburb LIKE '%{$suburb}%'" ;
+		$sql = "SELECT `Wifi Hotspot Name`, id, Latitude, Longitude FROM items WHERE suburb LIKE '%{$suburb}%'" ;
 		$results = [];
 		
 		$counter = 0;
 		foreach ($pdo->query($sql) as $row){
 			
-			$results[$counter] = array($row[0], $row[1]);
+			$results[$counter] = array($row[0], $row[1],  $row[2], $row[3]);
 			$counter++;
 			
 		}
@@ -133,7 +133,7 @@
 		//Send something back to indicate nothing was found
 		if (count($results) < 1){
 			
-			return array("NONE");
+			return array(array("NONE"));
 			
 		}
 		
@@ -141,6 +141,41 @@
 		
 	}
 	
+	//Get locations within a certain distance.
+	function distanceSearch($distance, $lat, $long){
+		
+		if($distance == ""){
+			
+			return array(array());
+			
+		}
+		
+		require 'sqlconnect.php';
+		
+		$sql = "SELECT `Wifi Hotspot Name`, id, Latitude, Longitude FROM items";
+		$results = [];
+		
+		$counter = 0;
+		foreach ($pdo->query($sql) as $row){
+			if(distance($row[2], $row[3], $lat, $long) < $distance){
+				$results[$counter] = array($row[0], $row[1],  $row[2], $row[3]);
+				$counter++;
+			}
+			
+		}
+		
+		//Send something back to indicate nothing was found
+		if (count($results) < 1){
+			
+			return array(array("NONE"));
+			
+		}
+		
+		return $results;
+		
+	}
+	
+
 	
 
 
