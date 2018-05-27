@@ -21,11 +21,11 @@
 				include 'lib/sql_functions.php';
 				include 'lib/php_general.php';
 				$suburbs = getSuburbs();
-				echo dynamicSelect($suburbs, 'suburb', 'Suburb');
+				echo dynamicSelect($suburbs, 'suburb', 'Suburb', false);
 				$rating = [1, 2, 3, 4, 5];
-				echo dynamicSelect($rating, 'rating', 'Rating');
+				echo dynamicSelect($rating, 'rating', 'Rating', false);
 				$distances = [10, 20, 50];
-				echo dynamicSelect($distances, 'distance', 'Distance');
+				echo dynamicSelect($distances, 'distance', 'Distance', false);
 			
 			?>
 			

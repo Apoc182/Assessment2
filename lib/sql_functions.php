@@ -6,7 +6,6 @@
 	//Returns an array of suburbs in the database.
 	function getSuburbs(){
 		require 'sqlconnect.php';
-		
 		$suburbs = [];
 		$sql = 'SELECT Suburb FROM items';
 		
@@ -26,7 +25,6 @@
 	//Returns an array of names of items from the database.
 	function getNames(){
 		require 'sqlconnect.php';
-		
 		$names = [];
 		$sql = 'SELECT `WiFi Hotspot Name` FROM items';
 		
@@ -78,14 +76,13 @@
 	
 	//Search on names
 	function nameSearch($name){
-		
+		require 'sqlconnect.php';
 		if($name == ""){
 			
 			return array(array());
 			
 		}
 		
-		require 'sqlconnect.php';
 		
 		$sql = "SELECT `Wifi Hotspot Name`, id, Latitude, Longitude FROM items WHERE `Wifi Hotspot Name` LIKE '%{$name}%'" ;
 		$results = [];
@@ -110,14 +107,13 @@
 	}
 	
 	function searchSuburb($suburb){
-		
+		require 'sqlconnect.php';
 		if($suburb == ""){
 			
 			return array(array());
 			
 		}
 		
-		require 'sqlconnect.php';
 		
 		$sql = "SELECT `Wifi Hotspot Name`, id, Latitude, Longitude FROM items WHERE suburb LIKE '%{$suburb}%'" ;
 		$results = [];
@@ -143,14 +139,13 @@
 	
 	//Get locations within a certain distance.
 	function distanceSearch($distance, $lat, $long){
-		
+		require 'sqlconnect.php';
 		if($distance == ""){
 			
 			return array(array());
 			
 		}
 		
-		require 'sqlconnect.php';
 		
 		$sql = "SELECT `Wifi Hotspot Name`, id, Latitude, Longitude FROM items";
 		$results = [];
@@ -175,7 +170,45 @@
 		
 	}
 	
+	//For the item page to gather the information it needs.
+	function getItem($id){
+		require 'sqlconnect.php';
+		$sql = "SELECT a.`Wifi Hotspot Name`, a.Address, a.Suburb, a.Latitude, a.Longitude, c.fname, c.lname, b.date, b.review_text, b.rating FROM items a LEFT JOIN reviews b ON a.id=b.iditem LEFT JOIN members c ON b.iduser=c.userid WHERE a.id=" . $id . " ORDER BY b.date";
+		
+		
+		$counter = 0;
+		foreach ($pdo->query($sql) as $row){
+			$results[$counter] = $row;
+			$counter++;
+			
+		}
+		
+		
+		return $results;
+		
+	}
+	
+	//For submitting a review.
+	function submitReview($itemid, $text, $rating, $user_id){
+		require 'sqlconnect.php';
+		
+		$sql = $pdo->prepare("INSERT INTO reviews (iditem, iduser, review_text, rating) VALUES (:itemid, :user_id, :text, :rating)");
+		$sql->bindParam(':itemid', $itemid, PDO::PARAM_INT);
+		$sql->bindParam(':user_id', $user_id, PDO::PARAM_INT);
+		$sql->bindParam(':text', $text, PDO::PARAM_STR);
+		$sql->bindParam(':rating', $rating, PDO::PARAM_INT);
+		$sql->execute();
+		
 
+	
+	
+	
+	
+	}
+		
+		
+		
+	
 	
 
 

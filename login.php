@@ -6,17 +6,25 @@
 		if(!empty($_POST)){
 			
 			require 'lib/sqlconnect.php';
-			$sql = 'SELECT email, password FROM members WHERE email ="' . $_POST['email'] . '"';	
-			$results = $pdo->query($sql);
-			
-			if(!$results->rowCount() == 0){
+			$stmt = $pdo->query('SELECT email, password, userid FROM members WHERE email ="' . $_POST['email'] . '"');
+			while($row = $stmt->fetch(\PDO::FETCH_ASSOC)){
 				
-				$pass = $results->fetchColumn(1);
+				$result = $row;
+				
+			}
+			
+			
+			if(count($result) > 0){
+				$pass = $result['password'];
+				$userid = $result['userid'];
+
 				
 				if(password_verify($_POST['password'], $pass)){
 				
 					session_start();
 					$_SESSION['loggedIn'] = true;
+					$_SESSION['userid'] = $userid;
+
 					
 					//This generally should be an absolute URL
 					header("Location: http://{$_SERVER['HTTP_HOST']}/assessment2/index.php");
@@ -25,11 +33,11 @@
 					
 				}
 				
-				return  "Right email, wrong pass";
+				return  "Right email, wrong password";
 				
 			}else{
 				
-				return "Mission failed...";
+				return "Invalid username and/or password.";
 				
 			}
 			

@@ -1,10 +1,18 @@
 <?php
 
 	//Pass this function what you need as a select list and it will generate it.
-	function dynamicSelect($list, $name, $placeholder){
+	function dynamicSelect($list, $name, $placeholder, $required){
 		
-		
-		$html = "<select name='" . $name . "'> <option value='' selected>" . $placeholder . "</option>";
+		if($required){
+			
+			$init = "<select required ";
+			
+		}else{
+			
+			$init = "<select ";
+			
+		}
+		$html = $init . "name='" . $name . "'> <option value='' selected>" . $placeholder . "</option>";
 		foreach($list as $item){
 			$html .= "<option value='" . $item . "'>" . $item . "</option>";					
 		}
